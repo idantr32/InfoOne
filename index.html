@@ -3,7 +3,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-       <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes">
       <title>InfoOne - all the inforamtion idan need</title>
       <link rel="stylesheet"href="css/InfoOne.css" type="text/css"/>
        <script type="application/x-javascript" src="js/jquery-3.2.1.js"></script>
@@ -350,6 +350,36 @@
 <!-- Scripts -->
 <script type="text/javascript">
 
+var mouseY = 0;
+var startMouseY = 0;
+$('body').on('mousedown', function (ev) {
+    mouseY = ev.pageY;
+    startMouseY = mouseY;
+    $(document).on('mousemove', function (e) {
+        if (e.pageY > mouseY) {
+            var d = e.pageY - startMouseY;
+            console.log("d: " + d);
+            if (d >= 200) {
+                location.reload();
+                $('body').append($('<img/>').attr('src', 'https://www.mormota.ro/skin/frontend/default/polysoft/images/spinner.gif'));
+            }
+            $('body').css('margin-top', d/4 + 'px');
+        }
+        else
+            $(document).unbind("mousemove");
+
+
+    });
+});
+$('body').on('mouseup', function () {
+    $('body').css('margin-top', '0px');
+    $(document).unbind("mousemove");
+});
+$('body').on('mouseleave', function () {
+    $('body').css('margin-top', '0px');
+    $(document).unbind("mousemove");
+});
+    
          
 //get SPCB
 function getSPCB() {
