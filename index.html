@@ -12,6 +12,7 @@
    </head>
    <body>
        <div id="content">
+           <img id="loadinggif" src="images/loader4.gif" style="position:absolute;display:none;"/>
 <!-- Start Full Text -->
 <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="full-text">
     
@@ -126,8 +127,10 @@
                                                       <!-- Spacing -->
                                                       <!-- content2 -->
                                                       <tr>
-                                                         <td id="stockSPCB" style="float:right; margin-right:30%; font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #889098; text-align:center; line-height: 24px;" st-content="3col-content1"><span id ="stockSPCBpt" style="float:right;margin-left:3px"></span>
+                                                         <td id ="stockSPCBpt" style="float:right; margin-right:30%; font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #889098; text-align:center; line-height: 24px;"></td>
+                                                          <td id="stockSPCB" style="float:right; margin-right:1%; font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #889098; text-align:center; line-height: 24px;" st-content="3col-content1">
                                                          </td>
+                                                          
                                                           
                                                       </tr>
                                                       <!-- end of content2 -->
@@ -355,17 +358,42 @@
 <script type="text/javascript">
 
   $('#content').ptrLight({
+      spinnerTimeout:500,
 
     'refresh': function() {
     // do something;
-        
-       location.reload();
+        $("#loadinggif").show();
+        eraseData();
+       
+        setTimeout(
+            function() {
+                
+                getDateTime();
+                getSPCB();
+                getWeather();
+                getETH();
+                $("#loadinggif").css("display","none");
+                $(".weatherImg").show();
+            }, 2000);        
+       
         
   }
 
 });
 
-         
+function eraseData() {
+    $("#stockSPCB").html("");
+    $("#stockSPCBpt").html("");    
+    $("#todaymax").html("");
+    $("#todaylow").html("");
+    $("#todayadd").html("");
+    $(".weatherImg").css("display","none");
+    $("#ethRatept").html("");
+    $("#ethRatept").html("");
+    $("#ethRate").html("");
+    $("#dateAndTime").html("");
+    
+}
 //get SPCB
 function getSPCB() {
 /*
@@ -389,10 +417,13 @@ function getSPCB() {
         $("#stockSPCBpt").append(" (" + fixedprcnt.toFixed(2) + "%)");
         if(data.changePercent < 0) {
             $("#stockSPCB").css("color","red");
+            $("#stockSPCBpt").css("color","red");
+            
         }
         
         else if(data.changePercent > 0) {
             $("#stockSPCB").css("color","green");
+            $("#stockSPCBpt").css("color","green");
         }        
     });
     
