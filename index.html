@@ -6,11 +6,15 @@
       <meta name="apple-mobile-web-app-capable" content="yes">
       <title>InfoOne - all the inforamtion idan need</title>
       <link rel="stylesheet"href="css/InfoOne.css" type="text/css"/>
-       <script type="application/x-javascript" src="js/jquery-3.2.1.js"></script>
+      <link rel="stylesheet"href="css/ptrLight.min.css" type="text/css"/>
+      <script type="application/x-javascript" src="js/jquery-3.2.1.js"></script>
+      <script type="application/x-javascript" src="js/ptrLight.min.js"></script>
    </head>
    <body>
+       <div id="content">
 <!-- Start Full Text -->
 <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="full-text">
+    
    <tbody>
       <tr>
          <td>
@@ -344,10 +348,22 @@
       </tr>
    </tbody>
 </table>
+       </div>           
 <!-- End of postfooter -->
 
 <!-- Scripts -->
 <script type="text/javascript">
+
+  $('#content').ptrLight({
+
+    'refresh': function() {
+    // do something;
+        
+       location.reload();
+        
+  }
+
+});
 
          
 //get SPCB
