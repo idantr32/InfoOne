@@ -198,6 +198,7 @@
                                                       <tr>
                                                          <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #889098; text-align:center; line-height: 24px;" st-content="3col-content2">
                                                             <div id="today">
+                                                                <div id="currentTemp" style="color:lightslategray;"></div><br/>
                                                                 <span class="wather" id="todaymax"></span>
                                                                 <span class="wather" id="todaylow"></span>
                                                                 <div class="wather" id="todayadd"></div><span><img class="weatherImg"/></span>
@@ -435,53 +436,24 @@ function getSPCB() {
           
 //get weather
 function getWeather() {
+    /*
         $.getJSON("https://query.yahooapis.com/v1/public/yql?format=json&q=select+title%2C+units.temperature%2C+item.forecast%0Afrom+weather.forecast%0Awhere+woeid+in+%28select+woeid+from+geo.places+where+text%3D%22nyc%2Cny%22%29%0Aand+u+%3D+%27C%27%0Alimit+5%0A%7C%0Asort%28field%3D%22item.forecast.date%22%2C+descending%3D%22false%22%29%0A%3B", function( data ) {
+      */
+    $.getJSON("http://api.openweathermap.org/data/2.5/weather?id=5128594&units=metric&appid=1fa14489c8702f6fbf81828eb1635055", function( data ) {
+        
+        var currentTemp = data.main.temp;
+        var maxTemp = data.main.temp_max;
+        var lowTemp = data.main.temp_min;
+        var description = data.weather[0].description;
+        var icon = data.weather[0].icon
+        ;
+    
+            $("#todaymax").append("Max: " + maxTemp + "°");
+            $("#todaylow").append("Low: " + lowTemp + "°");
+            $("#todayadd").append(description);
+            $(".weatherImg").attr("src","http://openweathermap.org/img/w/" + icon + ".png");
+            $("#currentTemp").append("Now: " + currentTemp + "°");
             
-            $("#todaymax").append("Max: " + data.query.results.channel[0].item.forecast.high + "°");
-            $("#todaylow").append("Low: " + data.query.results.channel[0].item.forecast.low + "°");
-            $("#todayadd").append(data.query.results.channel[0].item.forecast.text);
-            
-            if(data.query.results.channel[0].item.forecast.text == "Partly Cloudy") {
-                $(".weatherImg").attr("src","images/001lighticons-08.png");
-            }
-            
-            else if(data.query.results.channel[0].item.forecast.text == "mostly cloudy (day)"){
-                $(".weatherImg").attr("src","images/001lighticons-25.png");
-            }
-            
-            else if(data.query.results.channel[0].item.forecast.text == "mostly cloudy (night)"){
-                $(".weatherImg").attr("src","images/001lighticons-25.png");
-            }
-            
-            else if(data.query.results.channel[0].item.forecast.text == "mostly cloudy"){
-                $(".weatherImg").attr("src","images/001lighticons-25.png");
-            }    
-            
-            else if(data.query.results.channel[0].item.forecast.text == "Rain"){
-                $(".weatherImg").attr("src","images/001lighticons-18.png");
-            }                  
-            
-            else if(data.query.results.channel[0].item.forecast.text == "mixed rain and snow"){
-                $(".weatherImg").attr("src","images/001lighticons-23.png");
-            }                        
-            
-            else if(data.query.results.channel[0].item.forecast.text == "snow"){
-                $(".weatherImg").attr("src","images/001lighticons-23.png");
-            }       
-            
-            else if(data.query.results.channel[0].item.forecast.text == "fair"){
-                $(".weatherImg").attr("src","images/001lighticons-08.png");
-            }
-            
-            else if(data.query.results.channel[0].item.forecast.text == "scattered thunderstorms"){
-                $(".weatherImg").attr("src","images/001lighticons-18.png");
-            }            
-            
-            else if(data.query.results.channel[0].item.forecast.text == "Scattered Showers"){
-                $(".weatherImg").attr("src","images/001lighticons-18.png");
-            }            
-            
-
         }); 
 }
 
