@@ -475,7 +475,11 @@ function getWeather() {
             
             else if(data.query.results.channel[0].item.forecast.text == "scattered thunderstorms"){
                 $(".weatherImg").attr("src","images/001lighticons-18.png");
-            }                 
+            }            
+            
+            else if(data.query.results.channel[0].item.forecast.text == "Scattered Showers"){
+                $(".weatherImg").attr("src","images/001lighticons-18.png");
+            }            
             
 
         }); 
