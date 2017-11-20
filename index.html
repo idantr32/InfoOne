@@ -382,11 +382,11 @@ $('#content').ptrLight({
 function eraseData() {
     //$("#stockSPCB").html("");
     //$("#stockSPCBpt").html("");    
-    $("#currentTemp").html("");
-    $("#todaymax").html("");
-    $("#todaylow").html("");
-    $("#todayadd").html("");
-    $(".weatherImg").css("display","none");
+    //$("#currentTemp").html("");
+    //$("#todaymax").html("");
+    //$("#todaylow").html("");
+    //$("#todayadd").html("");
+    //$(".weatherImg").css("display","none");
     $("#ethRatept").html("");
     $("#ethRatept").html("");
     $("#ethRate").html("");
@@ -455,14 +455,29 @@ function getWeather() {
         var maxTemp = data.main.temp_max;
         var lowTemp = data.main.temp_min;
         var description = data.weather[0].description;
-        var icon = data.weather[0].icon
-        ;
-    
-            $("#todaymax").append("Max: " + maxTemp + "°");
-            $("#todaylow").append("Low: " + lowTemp + "°");
-            $("#todayadd").append(description);
-            $(".weatherImg").attr("src","images/" + icon + ".png");
-            $("#currentTemp").append("Now: " + currentTemp + "°");
+        var icon = data.weather[0].icon;
+        
+            if( $("#currentTemp").text() != "Now: " + currentTemp + "°") {                
+                $("#currentTemp").html("");
+                $("#currentTemp").append("Now: " + currentTemp + "°");
+                
+            }
+
+            if( $("#todaymax").text() != "Max: " + maxTemp + "°") {
+                $("#todaymax").html("");
+                $("#todaymax").append("Max: " + maxTemp + "°");    
+            }
+        
+            if( $("#todaylow").text() != "Low: " + lowTemp + "°") {
+                $("#todaylow").html("");
+                $("#todaylow").append("Low: " + lowTemp + "°");    
+            }
+
+            if( $("#todayadd").text() != description) {
+                $("#todayadd").html("");
+                $("#todayadd").append(description);
+                $(".weatherImg").attr("src","images/" + icon + ".png");
+            }
             
         }); 
 }
