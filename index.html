@@ -380,8 +380,8 @@ $('#content').ptrLight({
 });
 
 function eraseData() {
-    $("#stockSPCB").html("");
-    $("#stockSPCBpt").html("");    
+    //$("#stockSPCB").html("");
+    //$("#stockSPCBpt").html("");    
     $("#currentTemp").html("");
     $("#todaymax").html("");
     $("#todaylow").html("");
@@ -409,13 +409,23 @@ function getSPCB() {
         });
 */
       $.getJSON("https://api.iextrading.com/1.0/stock/spcb/price", function( data ) {
-        $("#stockSPCB").append("$" + data.toFixed(2));
+
+          if( $("#stockSPCB").val() != "$" + data.toFixed(2) ) {
+              
+              $("#stockSPCB").html("");
+              $("#stockSPCB").append("$" + data.toFixed(2));
+          }
+
     });  
 
     $.getJSON("https://api.iextrading.com/1.0/stock/spcb/quote?displayPercent=true", function( data ) {
         var fixedprcnt = data.changePercent;
         
-        $("#stockSPCBpt").append(" (" + fixedprcnt.toFixed(2) + "%)");
+        if($("#stockSPCBpt").val() != fixedprcnt.toFixed(2) + "%)") {  
+            $("#stockSPCBpt").html("");    
+            $("#stockSPCBpt").append(" (" + fixedprcnt.toFixed(2) + "%)");
+        }
+        
         if(data.changePercent < 0) {
             $("#stockSPCB").css("color","red");
             $("#stockSPCBpt").css("color","red");
