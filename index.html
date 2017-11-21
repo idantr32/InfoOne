@@ -9,6 +9,7 @@
       <link rel="stylesheet"href="css/ptrLight.css" type="text/css"/>
       <script type="application/x-javascript" src="js/jquery-3.2.1.js"></script>
       <script type="application/x-javascript" src="js/ptrLight.min.js"></script>
+      <script type="application/x-javascript" src="js/jquery.newstape.js"></script>
    </head>
    <body style="background-color:whitesmoke;">
        <div id="content">
@@ -278,6 +279,11 @@
                                                       <!-- end of read more -->
                                                    </tbody>
                                                 </table>
+                                                
+                                                <div width="186" align="center" border="0" cellpadding="0" cellspacing="0" class="devicewidthinner newstape">
+                                                    <div class="newstape-content">
+                                                    </div>
+                                                </div>
                                              </td>
                                           </tr>
                                           <!-- end of text content table -->
@@ -357,6 +363,7 @@
 <!-- Scripts -->
 <script type="text/javascript">
 
+//Initial loader
 $('#content').ptrLight({
       spinnerTimeout:1500,
 
@@ -505,7 +512,8 @@ function getETH() {
             
         });        
 }
-    
+
+//Get Date&Time
 function getDateTime() {
     var dt = new Date();
     var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
@@ -520,12 +528,47 @@ function getDateTime() {
     
     $("#dateAndTime").append(todaysdate + " " +time);
 }
+    
+//Get news 
+function getNews() {
 
+var url = 'https://newsapi.org/v2/top-headlines?' +
+          'sources=google-news-is&' +
+          'apiKey=72b3e1c36d8149b08e85b8fceb0f7aef';
+
+    
+    $.ajax({
+      dataType: "json",
+      url: url,
+      success: function(data) {
+      
+          var newsArray =  data.articles;          
+          for (i = 0; i < newsArray.length; ++i) {
+            $(".newstape-content").append(
+            
+                '<div class="news-block">' + 
+                    '<div class="newstitle">'+ newsArray[i].title +'</div>' + 
+                    '<div class="newsdate">'+ newsArray[i].publishedAt +'</div>' +
+                    '<p class="text-justify">' + newsArray[i].description + '</p>' +
+                    '<div class="text-right newslink"> <a href="'+ newsArray[i].url +'">קישור</a> </div>' + 
+                    '<hr />' + 
+                    '</div>'
+            );
+          }
+          
+      } 
+    });    
+}
+
+    
 getDateTime();
 getSPCB();
 getWeather();
 getETH();
-
+getNews();
+$('.newstape').newstape({
+    period:60
+});
     
 </script>
 <!-- end of scripts -->

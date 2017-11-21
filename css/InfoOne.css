@@ -62,3 +62,48 @@
     width: 50px;
     height: 50px;
 }
+
+
+
+
+.newstape {
+
+
+  color: #889098;
+  height: 100px;
+  overflow: hidden;
+  font-family: tahoma;
+
+}
+
+.newstape-content {
+
+  position: relative;
+  padding: 5px;
+text-align: right;
+
+}
+
+.newstape-drag { cursor: ns-resize; }
+
+.text-center { text-align: right; }
+
+.text-right { text-align: left; }
+
+.text-justify { text-align: right; 
+    font-size: 14px;
+}
+
+.newslink {
+    font-size: 14px;
+}
+
+.newstitle {
+     text-decoration: underline;
+     margin-bottom: 5px;
+}
+.newsdate {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
