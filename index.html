@@ -9,7 +9,6 @@
       <link rel="stylesheet"href="css/ptrLight.css" type="text/css"/>
       <script type="application/x-javascript" src="js/jquery-3.2.1.js"></script>
       <script type="application/x-javascript" src="js/ptrLight.min.js"></script>
-      <script type="application/x-javascript" src="js/jquery.newstape.js"></script>
    </head>
    <body style="background-color:whitesmoke;">
        <div id="content">
@@ -544,16 +543,7 @@ var url = 'https://newsapi.org/v2/top-headlines?' +
       
           var newsArray =  data.articles;          
           for (i = 0; i < newsArray.length; ++i) {
-            $(".newstape-content").append(
-            
-                '<div class="news-block">' + 
-                    '<div class="newstitle">'+ newsArray[i].title +'</div>' + 
-                    '<div class="newsdate">'+ newsArray[i].publishedAt +'</div>' +
-                    '<p class="text-justify">' + newsArray[i].description + '</p>' +
-                    '<div class="text-right newslink"> <a href="'+ newsArray[i].url +'">קישור</a> </div>' + 
-                    '<hr />' + 
-                    '</div>'
-            );
+
           }
           
       } 
@@ -565,10 +555,8 @@ getDateTime();
 getSPCB();
 getWeather();
 getETH();
-getNews();
-$('.newstape').newstape({
-    period:60
-});
+//getNews();
+
     
 </script>
 <!-- end of scripts -->
