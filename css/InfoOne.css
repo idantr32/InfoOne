@@ -68,10 +68,12 @@
     font-family:  sans-serif;
     text-align: right;
     direction: rtl;
+    color: #666666;
 
 }
 .tickerul li {
     text-align: right;
+    color: #666666;
 }
 
 
