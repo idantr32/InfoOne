@@ -1,27 +1,4 @@
 
-//Initial loader
-$('#content').ptrLight({
-      spinnerTimeout:1500,
-
-    'refresh': function() {
-    // do something;
-        
-       
-        setTimeout(
-            function() {
-                eraseData();
-                getDateTime();
-                getSPCB();
-                getWeather();
-                getETH();
-                $(".weatherImg").show();
-            }, 1500);        
-       
-        
-  }
-
-});
-
 function eraseData() {
     //$("#stockSPCB").html("");
     //$("#stockSPCBpt").html("");    
@@ -177,22 +154,32 @@ var url = 'https://newsapi.org/v2/top-headlines?' +
       dataType: "json",
       url: url,
       success: function(data) {
-      
+
           var newsArray =  data.articles;          
           for (i = 0; i < newsArray.length; ++i) {
-            $(".ticker").append(
-            
-                    '<li>'+ newsArray[i].title +'</div>'
-                    //'<div class="newsdate">'+ newsArray[i].publishedAt +'</div>' +
-                    //'<p class="text-justify">' + newsArray[i].description + '</p>' +
-                    //'<div class="text-right newslink"> <a href="'+ newsArray[i].url +'">קישור</a> </div>' + 
-                    //'<hr />' + 
-
-            );
+                var date = new Date(newsArray[i].publishedAt),
+                    yr = date.getFullYear(),
+                    month = date.getMonth() + 1 < 10 ? '0' + date.getMonth() + 1 : date.getMonth() + 1,
+                    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+                    h = date.getHours(),
+                    m = date.getMinutes();
+                newDate = month + '/' + day + '/' + yr.toString().substring(2) + ' ' + "[" + h + ':' + m + "]";
+              
+              
+                $("#ticker ul").append(
+                   '<li>' + newDate + ' - ' + newsArray[i].title  + ' ' + '</li>'
+                );
           }
-          
+          $('#ticker').vTicker('init', {speed: 500, 
+            pause: 10000,
+            showItems: 1,
+            padding:4
+          });
       } 
-    });    
+    });  
+    
+   
+    
 }
 
     
@@ -200,4 +187,7 @@ getDateTime();
 getSPCB();
 getWeather();
 getETH();
-//getNews();
+getNews();
+
+
+

@@ -54,7 +54,7 @@
          img[class=banner] {width: 280px!important;height:140px!important;}
          img[class=colimg2] {width: 280px!important;height:140px!important;}
          td[class=mobile-hide]{display:none!important;}
-         td[class="padding-bottom25"]{padding-bottom:25px!important;}
+         td[class="padding-bottom25"]{padding-bottom:5px!important;}
         
          }
         
@@ -63,6 +63,16 @@
     height: 50px;
 }
 
+.tickerul {
+    
+    font-family:  sans-serif;
+    text-align: right;
+    direction: rtl;
+
+}
+.tickerul li {
+    text-align: right;
+}
 
 
 
