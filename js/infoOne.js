@@ -171,7 +171,7 @@ var url = 'https://newsapi.org/v2/top-headlines?' +
                 );
           }
           $('#ticker').vTicker('init', {speed: 500, 
-            pause: 6000,
+            pause: 5000,
             showItems: 1,
             padding:4
           });
