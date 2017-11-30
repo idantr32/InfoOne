@@ -167,7 +167,7 @@ var url = 'https://newsapi.org/v2/top-headlines?' +
               
               
                 $("#ticker ul").append(
-                   '<li>' + newDate + ' - ' + newsArray[i].title  + ' ' + '<span><a href= '+newsArray[i].url+'>קישור</a></span></li>'
+                   '<li>' + newDate + ' - ' + newsArray[i].title  + ' ' + '(<span><a href= '+newsArray[i].url+'>קישור</a>)</span></li>'
                 );
           }
           $('#ticker').vTicker('init', {speed: 500, 
